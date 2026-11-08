@@ -7,7 +7,7 @@ from __future__ import annotations
 
 from typing import Any, Optional
 
-from emby_shared.music_common import AUTO, KINDS, Resolved, ServiceError, pick
+from emby_shared.music_common import AUTO, KINDS, MAX_ITEMS, Resolved, ServiceError, pick
 
 _TIMEOUT = 10
 _TYPES = {"MusicArtist": "artist", "MusicAlbum": "album", "Audio": "track", "Playlist": "playlist"}
@@ -75,7 +75,7 @@ class EmbyService:
             rows = self._get("/Items", ArtistIds=item["Id"], SortBy="Random", **base).get("Items")
         else:
             rows = self._get(f"/Playlists/{item['Id']}/Items", UserId=self._user_id()).get("Items")
-        return [r["Id"] for r in rows or [] if r.get("Id")]
+        return [r["Id"] for r in rows or [] if r.get("Id")][:MAX_ITEMS]  # the playlist endpoint ignores Limit
 
 
 def _by(item: dict) -> str:

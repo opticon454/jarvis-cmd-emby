@@ -97,3 +97,11 @@ def test_nothing_found_and_unreachable():
 
     with pytest.raises(ServiceError, match="can't reach your Emby"):
         EmbyService(Down(), "http://emby:8096", "K").find("x")
+
+
+def test_a_long_playlist_is_capped_because_the_playlist_endpoint_ignores_limit():
+    from emby_shared.music_common import MAX_ITEMS
+
+    routes = {"/Items": items({"Id": "pl", "Name": "Big", "Type": "Playlist"}),
+              "/Playlists/pl/Items": items(*({"Id": f"t{i}"} for i in range(MAX_ITEMS * 2)))}
+    assert len(svc(routes)[0].find("Big", "playlist").urls) == MAX_ITEMS

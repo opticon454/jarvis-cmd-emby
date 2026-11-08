@@ -40,7 +40,9 @@ image's ALSA `output` alias. Long queues are limited to 50 tracks.
 
 ## Status
 
-Tested against a fake Emby server shaped from the REST API. **Not yet run against a real server.**
+Verified live on 20261108 against an Emby 4.10 server with a real music library: a song by artist, an exact artist name
+(beating a song of the same name), an album in track order, and a playlist; the stream addresses return audio, and mpv
+opens them with the API key sent as a header. **Not yet heard through a node speaker.** Jellyfin is untested.
 
 ## Tests
 
