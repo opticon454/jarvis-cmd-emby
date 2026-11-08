@@ -1,0 +1,7 @@
+jarvis-cmd-emby
+Copyright 2026 opticon454
+
+Licensed under the Apache License, Version 2.0. See LICENSE.
+
+Uses Emby Server REST API (https://emby.media/) through the requests library (Apache-2.0), and mpv (GPL-2.0+) as a separate program.
+This package is not affiliated with or endorsed by Emby.
